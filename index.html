@@ -1,0 +1,69 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<title>生命之眼・個人洞察與人生方向報告（測試版）</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;color:#222;background:#f6f4ef;line-height:1.7}
+.beta{background:#b3261e;color:#fff;text-align:center;padding:6px 10px;font-size:.92em;position:sticky;top:0;z-index:5}
+main{max-width:800px;margin:0 auto;padding:14px}
+header h1{font-size:1.35em;margin:.4em 0 .1em}header p{margin:.2em 0;color:#555;font-size:.92em}
+.card{background:#fff;border:1px solid #ddd;border-radius:10px;padding:14px;margin:12px 0}
+label{display:block;font-weight:600;margin:.7em 0 .25em}label small{font-weight:400;color:#666}
+input,select{width:100%;font-size:16px;padding:9px 10px;border:1px solid #bbb;border-radius:7px;background:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:520px){.row{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{border:1px solid #1f4e9a;color:#1f4e9a;background:#fff;border-radius:16px;padding:5px 11px;font-size:.88em;cursor:pointer}
+.hint{color:#666;font-size:.86em;margin:.3em 0}
+button.primary{width:100%;margin-top:14px;padding:12px;font-size:17px;border:0;border-radius:8px;background:#1f4e9a;color:#fff;cursor:pointer}
+button:disabled{opacity:.6}
+.msg{border-radius:8px;padding:10px 14px;margin:12px 0}.msg.err{background:#fdecea;border:1px solid #e0a39c}.msg ul{margin:.3em 0;padding-left:1.3em}.where{color:#777;font-size:.85em}
+.dl{display:flex;gap:10px;flex-wrap:wrap;position:sticky;top:34px;background:#f6f4ef;padding:8px 0;z-index:4}.dl button{flex:1;min-width:140px;padding:11px;font-size:16px;border-radius:8px;border:1px solid #1f4e9a;background:#fff;color:#1f4e9a;cursor:pointer}
+#report{background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;font-family:"Noto Serif TC","PingFang TC","Songti TC","Microsoft JhengHei",serif;line-height:1.85}
+#report h1{text-align:center;border-bottom:2px solid #333;padding-bottom:.3em;font-size:1.4em}#report h2{border-bottom:1px solid #999;margin-top:1.8em;font-size:1.2em}#report h3{color:#1f4e9a;font-size:1.08em}#report h4{color:#b3261e}#report h5{margin:.6em 0}
+#report .example{background:#fff4d6;border:1px solid #e0c060;padding:6px 10px;text-align:center;font-size:.9em}
+.tw{overflow-x:auto}#report table{border-collapse:collapse;width:100%;margin:.8em 0;font-size:.92em}#report td,#report th{border:1px solid #bbb;padding:4px 6px;vertical-align:top}#report th{background:#f0f0f0}#report caption{text-align:left;color:#555}
+#report .note{background:#f4f4f4;color:#555;font-size:.88em;padding:6px 10px;border-radius:4px;margin:.6em 0}#report .b{font-weight:bold}
+#report .pending{color:#b3261e;font-size:.8em;border:1px solid #b3261e;border-radius:3px;padding:0 3px;margin-left:3px}
+#report blockquote{border-left:3px solid #999;margin:.6em 0;padding:.2em .8em;background:#fafafa}#report cite{display:block;font-size:.85em;color:#666}
+footer{color:#777;font-size:.82em;margin:20px 0 40px}
+</style></head><body>
+<div class="beta">測試版・僅供內部測試，內容仍在調整中</div>
+<main>
+<header><h1>生命之眼・個人洞察與人生方向報告</h1>
+<p>輸入出生資料，產生報告，可下載 PDF 或 Word。所有計算都在您的瀏覽器裡完成，資料不會上傳。</p></header>
+<form id="form" class="card" autocomplete="off">
+  <label>先試虛構範例 <small>（點一下自動填入）</small></label><div class="chips" id="presets"></div>
+  <input type="hidden" id="exampleFlag" value="">
+  <label for="name">姓名或代號 <small>（選填，只印在報告上）</small></label><input id="name" maxlength="40" placeholder="例如：小明">
+  <div class="row">
+    <div><label for="gender">性別</label><select id="gender"><option value="">請選擇</option><option value="male">男</option><option value="female">女</option></select></div>
+    <div><label for="date">出生日期 <small>（國曆）</small></label><input id="date" type="date" min="1901-01-01" max="2049-12-31"></div>
+  </div>
+  <label for="prec">出生時間精度</label>
+  <select id="prec"><option value="exact">精確到分</option><option value="pm15" selected>正負 15 分</option><option value="pm60">正負 1 小時</option><option value="shichen">只知時辰</option><option value="unknown">不知道</option></select>
+  <div id="timeRow"><label for="time">出生時間 <small>（出生地鐘錶上的時間，照記錄填，不用自己換算）</small></label><input id="time" type="time" value="12:00"></div>
+  <div id="shichenRow" hidden><label for="shichen">時辰</label><select id="shichen"></select></div>
+  <p id="unknownNote" class="hint" hidden>不知道出生時間時，時柱和紫微命盤都無法確定，報告多數面向會寫「依據不足」。</p>
+  <label for="city">出生地</label><select id="city"></select>
+  <div id="customBox" hidden>
+    <label for="placeName">地點名稱 <small>（選填）</small></label><input id="placeName" maxlength="40" placeholder="例如：溫哥華">
+  </div>
+  <div class="row">
+    <div><label for="lon">經度 <small>（東經正、西經負）</small></label><input id="lon" inputmode="decimal"></div>
+    <div><label for="lat">緯度 <small>（北緯正、南緯負）</small></label><input id="lat" inputmode="decimal"></div>
+  </div>
+  <label for="tz">時區 <small>（例如 Asia/Taipei）</small></label>
+  <div class="row"><input id="tz" list="tzList"><button type="button" id="autoTz" class="chip" style="border-radius:7px">依經緯度推算時區</button></div>
+  <datalist id="tzList"></datalist>
+  <p class="hint" id="placeInfo"></p>
+  <p class="hint">排盤口徑：依出生地鐘錶上記錄的時間排盤；八字與河洛理數 0:00 換日，紫微斗數 23:00 換日；東經 70° 以西日柱加一天。</p>
+  <button class="primary" id="go" type="submit">產生報告</button>
+</form>
+<div id="msg" class="msg" hidden></div>
+<section id="out" hidden>
+  <div class="dl"><button type="button" id="dlPdf">下載 PDF</button><button type="button" id="dlDocx">下載 Word</button></div>
+  <article id="report"></article>
+</section>
+<footer>測試版・版本 2026/11/19 01:43:57（台北時間）。本報告為命理研究參考，不構成醫療、法律、財務建議。</footer>
+</main>
+<script type="module" src="./app.js"></script>
+</body></html>
