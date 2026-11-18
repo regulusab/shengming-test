@@ -25,12 +25,13 @@ button:disabled{opacity:.6}
 #report .pending{color:#b3261e;font-size:.8em;border:1px solid #b3261e;border-radius:3px;padding:0 3px;margin-left:3px}
 #report blockquote{border-left:3px solid #999;margin:.6em 0;padding:.2em .8em;background:#fafafa}#report cite{display:block;font-size:.85em;color:#666}
 .testinfo{margin:12px 0;color:#666;font-size:.85em;background:#fff;border:1px dashed #bbb;border-radius:8px;padding:6px 12px}.testinfo summary{cursor:pointer}
+.gos{display:flex;gap:10px}.gos button{flex:1}button.primary.alt{background:#1f2a44}#reportB{background:#fff;border:1px solid #ddd;border-radius:10px;padding:18px}@media(max-width:520px){#reportB{padding:12px}}
 footer{color:#777;font-size:.82em;margin:20px 0 40px}
 </style></head><body>
 <div class="beta">測試版・僅供內部測試，內容仍在調整中</div>
 <main>
 <header><h1>生命之眼・個人洞察與人生方向報告</h1>
-<p>輸入出生資料，產生報告，可下載 PDF 或 Word。所有計算都在您的瀏覽器裡完成，資料不會上傳。</p></header>
+<p>輸入出生資料，產生報告，可下載 PDF 或 Word。「B版本報告」是同一份分析的另一種版面（命盤概要、大運表、一句總結、分面向依據）。所有計算都在您的瀏覽器裡完成，資料不會上傳。</p></header>
 <form id="form" class="card" autocomplete="off">
   <label>先試虛構範例 <small>（點一下自動填入）</small></label><div class="chips" id="presets"></div>
   <input type="hidden" id="exampleFlag" value="">
@@ -57,7 +58,7 @@ footer{color:#777;font-size:.82em;margin:20px 0 40px}
   <datalist id="tzList"></datalist>
   <p class="hint" id="placeInfo"></p>
   <p class="hint">排盤口徑：依出生地鐘錶上記錄的時間排盤；八字與河洛理數 0:00 換日，紫微斗數 23:00 換日；東經 70° 以西日柱加一天。</p>
-  <button class="primary" id="go" type="submit">產生報告</button>
+  <div class="gos"><button class="primary" id="go" type="submit">產生報告</button><button class="primary alt" id="goB" type="button">B版本報告</button></div>
 </form>
 <div id="msg" class="msg" hidden></div>
 <section id="out" hidden>
@@ -65,7 +66,12 @@ footer{color:#777;font-size:.82em;margin:20px 0 40px}
   <article id="report"></article>
   <details id="testInfo" class="testinfo"></details>
 </section>
-<footer>測試版・版本 2026/11/19 02:16:12（台北時間）。本報告為命理研究參考，不構成醫療、法律、財務建議。</footer>
+<section id="outB" hidden>
+  <div class="dl"><button type="button" id="dlPdfB">下載 B版 PDF</button><button type="button" id="dlDocxB">下載 B版 Word</button></div>
+  <article id="reportB"></article>
+  <details id="testInfoB" class="testinfo"></details>
+</section>
+<footer>測試版・版本 2026/11/19 03:04:42（台北時間）。本報告為命理研究參考，不構成醫療、法律、財務建議。</footer>
 </main>
 <script type="module" src="./app.js"></script>
 </body></html>
