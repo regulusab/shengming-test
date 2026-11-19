@@ -57,7 +57,7 @@ footer{color:#777;font-size:.82em;margin:20px 0 40px}
   <div class="row"><input id="tz" list="tzList"><button type="button" id="autoTz" class="chip" style="border-radius:7px">依經緯度推算時區</button></div>
   <datalist id="tzList"></datalist>
   <p class="hint" id="placeInfo"></p>
-  <p class="hint">排盤口徑：依出生地鐘錶上記錄的時間排盤；八字與河洛理數 0:00 換日，紫微斗數 23:00 換日；東經 70° 以西日柱加一天。紫微斗數的農曆日期以出生地（標準時間）的日月合朔定初一。</p>
+  <p class="hint">排盤口徑：依出生地鐘錶上記錄的時間排盤；八字與河洛理數 0:00 換日，紫微斗數 23:00 換日；東經 70° 以西日柱加一天。紫微斗數與河洛理數的農曆以出生地經度地方時（夏令期間加夏令）的日月合朔定初一，月序與閏月依中國農曆；東經 70° 以西紫微只有日柱加一天，農曆日不加。</p>
   <div class="gos"><button class="primary" id="go" type="submit">產生報告</button><button class="primary alt" id="goB" type="button">B版本報告</button><button class="primary alt2" id="goC" type="button">C版本報告</button></div>
 </form>
 <div id="msg" class="msg" hidden></div>
@@ -76,7 +76,7 @@ footer{color:#777;font-size:.82em;margin:20px 0 40px}
   <article id="reportC"></article>
   <details id="testInfoC" class="testinfo"></details>
 </section>
-<footer>測試版・版本 2026/11/19 09:07:08（台北時間）。本報告為命理研究參考，不構成醫療、法律、財務建議。</footer>
+<footer>測試版・版本 2026/11/19 09:18:14（台北時間）。本報告為命理研究參考，不構成醫療、法律、財務建議。</footer>
 </main>
 <script type="module" src="./app.js"></script>
 </body></html>
